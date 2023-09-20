@@ -11,10 +11,10 @@ pool:
    - agent.name -equals RPLocalMac
 
 variables:
-  bkstrgrg:'rp0041-rg'
-  bkstrg:'rp0041sa'
-  bkcontainer:'tfstate'
-  bkstrgkey:'tf001.tfstate'
+  bkstrgrg: 'rp0041-rg'
+  bkstrg: 'rp0041sa'
+  bkcontainer: 'tfstate'
+  bkstrgkey: 'tf001.tfstate'
 
 stages:
   - stage: tfvalidate
