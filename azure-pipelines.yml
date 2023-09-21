@@ -68,6 +68,6 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              enviornmentServiceNameAzureRM: 'rp0041-rg'
+              environmentServiceNameAzureRM: 'rp0041-rg'
            
     
