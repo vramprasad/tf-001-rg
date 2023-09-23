@@ -21,53 +21,12 @@ stages:
     jobs:
       - job: validate
         continueOnError: false
-        displayName: 'Terraform Validate'
+        displayName: 'Terraform Version check'
         steps:
-          - task: TerraformInstaller@1
-            displayName: 'TF Install'
+          - task: Bash@3
+            displayName: 'Bash'
             inputs:
-              terraformVersion: 'latest'
-          - task: TerraformTaskV4@4
-            displayName: 'TF init'
-            inputs:
-              provider: 'azurerm'
-              command: 'init'
-              backendServiceArm: 'rp0041-rg'
-              backendAzureRmResourceGroupName: '$(bkstrgrg)'
-              backendAzureRmStorageAccountName: '$(bkstrg)'
-              backendAzureRmContainerName: '$(bkcontainer)'
-              backendAzureRmKey: '$(bkstrgkey)'
-          - task: TerraformTaskV4@4
-            displayName: 'TF validate'
-            inputs:
-              provider: 'azurerm'
-              command: 'validate'
-  - stage: tfdeploy
-    condition: succeeded('tfvalidate')
-    dependsOn: 'tfvalidate'
-    jobs:
-      - job: apply
-        displayName: 'Apply'
-        steps:
-          - task: TerraformInstaller@1
-            displayName: 'Install'
-            inputs:
-              terraformVersion: 'latest'
-          - task: TerraformTaskV4@4
-            displayName: 'init'
-            inputs:
-              provider: 'azurerm'
-              command: 'init'
-              backendServiceArm: 'rp0041-rg'
-              backendAzureRmResourceGroupName: '$(bkstrgrg)'
-              backendAzureRmStorageAccountName: '$(bkstrg)'
-              backendAzureRmContainerName: '$(bkcontainer)'
-              backendAzureRmKey: '$(bkstrgkey)'
-          - task: TerraformTaskV4@4
-            displayName: 'plan'
-            inputs:
-              provider: 'azurerm'
-              command: 'plan'
-              environmentServiceNameAzureRM: 'rp0041-rg-sc'
-           
-    
+              targetType: 'inline'
+              script: |
+                echo "Bash"
+                terraform -v
