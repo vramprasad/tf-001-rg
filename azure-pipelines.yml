@@ -20,10 +20,10 @@ stages:
   - stage: tfvalidate
     jobs:
       - job: validate
-        displayName: 'Terraform Version check'
+        displayName: 'Terraform Validate'
         steps:
           - task: Bash@3
-            displayName: 'Bash'
+            displayName: 'Check TF version'
             inputs:
               targetType: 'inline'
               script: |
@@ -31,3 +31,16 @@ stages:
                 terraform -v
                 pwd
                 ls -ltrh
+          - task: Bash@3
+            displayName: 'Init'
+            inputs:
+              targetType: 'inline'
+              script: |
+                terraform init
+          - task: Bash@3
+            displayName: 'Validate'
+            inputs:
+              targetType: 'inline'
+              script: |
+                terraform validate
+                
