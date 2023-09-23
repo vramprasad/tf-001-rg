@@ -20,7 +20,6 @@ stages:
   - stage: tfvalidate
     jobs:
       - job: validate
-        continueOnError: false
         displayName: 'Terraform Version check'
         steps:
           - task: Bash@3
@@ -30,3 +29,5 @@ stages:
               script: |
                 echo "Bash"
                 terraform -v
+                pwd
+                ls -ltrh
