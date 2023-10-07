@@ -37,21 +37,21 @@ stages:
                 ls -ltrh
           - task: Bash@3
             displayName: 'Init - Dev'
-            condition: eq(variables['targetEnvironment'],'dev')
+            condition: eq('${{ parameters.targetEnvironment }}','dev')
             inputs:
               targetType: 'inline'
               script: |
                 terraform init -backend-config=./environment/backend_d.conf
           - task: Bash@3
             displayName: 'Init - Test'
-            condition: eq(variables['targetEnvironment'],'test')
+            condition: eq('${{ parameters.targetEnvironment }}', 'test')
             inputs:
               targetType: 'inline'
               script: |
                 terraform init -backend-config=./environment/backend_t.conf
           - task: Bash@3
             displayName: 'Init - Acc'
-            condition: eq(variables['targetEnvironment'],'acc')
+            condition: eq('${{ parameters.targetEnvironment }}','acc')
             inputs:
               targetType: 'inline'
               script: |
@@ -64,6 +64,7 @@ stages:
                 terraform validate
           - task: Bash@3
             displayName: 'Plan - Dev'
+            condition: eq('${{ parameters.targetEnvironment }}','dev')
             inputs:
               targetType: 'inline'
               script: |
