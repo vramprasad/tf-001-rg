@@ -23,10 +23,10 @@ name = "secret-app-01" // Name of secret
 key_vault_id = data.azurerm_key_vault.rp0041-kv.id
 }
 
-/*resource "azurerm_resource_group" "rg" {
+resource "azurerm_resource_group" "rg" {
     name = var.resource_group_name
     location = var.res_location
-}*/
+}
 
 output "key_from_vault" {
   value     = "${data.azurerm_key_vault_secret.kvsecret.value}"
