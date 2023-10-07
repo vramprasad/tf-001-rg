@@ -10,18 +10,7 @@ terraform {
     }
   }
 
-  locals {
-    l_tfs_RG = var.tfs_RG
-    l_tfs_storageaccount = var.tfs_storageaccount
-    l_tfs_container = var.tfs_container
-    l_tfs_key = var.tfs_key
-  }
-
   backend "azurerm" {
-      resource_group_name  = l_tfs_RG
-      storage_account_name = l_tfs_storageaccount
-      container_name       = l_tfs_container
-      key                  = l_tfs_key
   }
 }
 data "azurerm_key_vault" "rp0041-kv" {

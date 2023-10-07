@@ -36,7 +36,7 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
-                terraform init
+                terraform init -backend-config=backend_d.conf
           - task: Bash@3
             displayName: 'Validate'
             inputs:
