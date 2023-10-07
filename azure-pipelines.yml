@@ -36,26 +36,26 @@ stages:
                 pwd
                 ls -ltrh
           - task: Bash@3
-            displayName: 'Init'
+            displayName: 'Init - Dev'
             condition: eq(variables['targetEnvironment'],'dev')
             inputs:
               targetType: 'inline'
               script: |
-                terraform init -backend-config=environment/backend_d.conf
+                terraform init -backend-config=./environment/backend_d.conf
           - task: Bash@3
-            displayName: 'Init'
+            displayName: 'Init - Test'
             condition: eq(variables['targetEnvironment'],'test')
             inputs:
               targetType: 'inline'
               script: |
-                terraform init -backend-config=environment/backend_t.conf
+                terraform init -backend-config=./environment/backend_t.conf
           - task: Bash@3
-            displayName: 'Init'
+            displayName: 'Init - Acc'
             condition: eq(variables['targetEnvironment'],'acc')
             inputs:
               targetType: 'inline'
               script: |
-                terraform init -backend-config=environment/backend_a.conf
+                terraform init -backend-config=./environment/backend_a.conf
           - task: Bash@3
             displayName: 'Validate'
             inputs:
