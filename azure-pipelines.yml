@@ -63,11 +63,11 @@ stages:
               script: |
                 terraform validate
           - task: Bash@3
-            displayName: 'Plan'
+            displayName: 'Plan - Dev'
             inputs:
               targetType: 'inline'
               script: |
-                terraform plan
+                terraform plan -var-file ./environment/dev.tfvars
           - task: Bash@3
             displayName: 'List files'
             inputs:
