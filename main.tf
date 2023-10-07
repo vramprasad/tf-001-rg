@@ -29,5 +29,5 @@ key_vault_id = data.azurerm_key_vault.rp0041-kv.id
 }*/
 
 output "key_from_vault" {
-  value     = azurerm_key_vault_secret.kvsecret
+  value     = "${data.azurerm_key_vault_secret.kvsecret.value}"
 }
